@@ -1,0 +1,1 @@
+Voor onderdeel 2 van de opdracht een if statement toegoevoegd aan de code die wordt geactiveerd als de speler in aanraking komt met een raket. Als de speler boven de raket zit 'Reset()' de raket, anders 'Die()'s the player.
