@@ -11,15 +11,16 @@ partial class Player : AnimatedGameObject
     protected bool exploded;
     protected bool finished;
     protected bool walkingOnIce, walkingOnHot;
+    protected int counter;
 
     public Player(Vector2 start) : base(2, "player")
     {
-        LoadAnimation("Sprites/Player/spr_idle", "idle", true); 
+        LoadAnimation("Sprites/Player/spr_idle", "idle", true);
         LoadAnimation("Sprites/Player/spr_run@13", "run", true, 0.05f);
-        LoadAnimation("Sprites/Player/spr_jump@14", "jump", false, 0.05f); 
+        LoadAnimation("Sprites/Player/spr_jump@14", "jump", false, 0.05f);
         LoadAnimation("Sprites/Player/spr_celebrate@14", "celebrate", false, 0.05f);
         LoadAnimation("Sprites/Player/spr_die@5", "die", false);
-        LoadAnimation("Sprites/Player/spr_explode@5x5", "explode", false, 0.04f); 
+        LoadAnimation("Sprites/Player/spr_explode@5x5", "explode", false, 0.04f);
 
         startPosition = start;
         Reset();
@@ -66,11 +67,28 @@ partial class Player : AnimatedGameObject
         {
             Mirror = velocity.X < 0;
         }
-        if ((inputHelper.KeyPressed(Keys.Space) || inputHelper.KeyPressed(Keys.Up)) && isOnTheGround)
+
+        if (inputHelper.KeyPressed(Keys.Space) || inputHelper.KeyPressed(Keys.Up))
+        {
+            counter = 10;           
+        }
+        counter--;
+
+        if (counter < 0)
+            counter = 0;
+
+        if (counter > 0 && isOnTheGround)
         {
             Jump();
+            counter = 0;
         }
     }
+
+
+    /*if ((inputHelper.KeyPressed(Keys.Space) || inputHelper.KeyPressed(Keys.Up)) && isOnTheGround)
+    {
+        Jump();
+    }*/
 
     public override void Update(GameTime gameTime)
     {
