@@ -84,12 +84,6 @@ partial class Player : AnimatedGameObject
         }
     }
 
-
-    /*if ((inputHelper.KeyPressed(Keys.Space) || inputHelper.KeyPressed(Keys.Up)) && isOnTheGround)
-    {
-        Jump();
-    }*/
-
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
