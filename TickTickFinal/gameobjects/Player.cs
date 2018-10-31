@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 
-partial class Player : AnimatedGameObject
+public partial class Player : AnimatedGameObject
 {
     protected Vector2 startPosition;
     protected bool isOnTheGround;
@@ -11,7 +11,7 @@ partial class Player : AnimatedGameObject
     protected bool exploded;
     protected bool finished;
     protected bool walkingOnIce, walkingOnHot;
-    protected int counter;
+    protected int buffer;
 
     public Player(Vector2 start) : base(2, "player")
     {
@@ -70,17 +70,17 @@ partial class Player : AnimatedGameObject
 
         if (inputHelper.KeyPressed(Keys.Space) || inputHelper.KeyPressed(Keys.Up))
         {
-            counter = 10;           
+            buffer = 10;           
         }
-        counter--;
+        buffer--;
 
-        if (counter < 0)
-            counter = 0;
+        if (buffer < 0)
+            buffer = 0;
 
-        if (counter > 0 && isOnTheGround)
+        if (buffer > 0 && isOnTheGround)
         {
             Jump();
-            counter = 0;
+            buffer = 0;
         }
     }
 
@@ -127,8 +127,6 @@ partial class Player : AnimatedGameObject
         }
 
         DoPhysics();
-
-        GameEnvironment.Camera.Update();
     }
 
     public void Explode()

@@ -28,8 +28,6 @@ class LevelMenuState : GameObjectList
         backButton = new Button("Sprites/spr_button_back", 1);
         backButton.Position = new Vector2((GameEnvironment.Screen.X - backButton.Width) / 2, 750);
         Add(backButton);
-
-        GameEnvironment.Camera.IsActive = false;
     }
 
     public int LevelSelected

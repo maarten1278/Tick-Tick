@@ -1,26 +1,29 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 
 public class Camera : GameObject
 {
-    bool isActive;
+    Player player;
 
-    public Camera()
-        : base()
+    public Camera() : base()
     {
-        isActive = false;
-        position = new Vector2(300, 300);
+        position = new Vector2(GameEnvironment.Screen.X / 2, GameEnvironment.Screen.Y / 2);
+        visible = false;
     }
 
-    public void Update()
+    public override void Update(GameTime gameTime)
     {
-        Player player = GameWorld.Find("player") as Player;
-        position.X = GameEnvironment.Screen.X / 2 - player.Position.X;
-        position.Y = GameEnvironment.Screen.Y / 2 - player.Position.Y;
+        Console.WriteLine(player.Position.X);
+        if (player != null)
+        {
+            position.X =  player.Position.X - GameEnvironment.Screen.X / 2;
+            position.Y = player.Position.Y + GameEnvironment.Screen.Y / 2;
+            Console.WriteLine(player.Position.X);
+        }
     }
 
-    public bool IsActive
+    public Player Player
     {
-        get { return isActive; }
-        set { value = isActive; }
+        set { value = player; }
     }
 }

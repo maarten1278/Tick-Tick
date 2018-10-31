@@ -19,8 +19,6 @@ class TitleMenuState : GameObjectList
         helpButton = new Button("Sprites/spr_button_help", 1);
         helpButton.Position = new Vector2((GameEnvironment.Screen.X - helpButton.Width) / 2, 600);
         Add(helpButton);
-
-        GameEnvironment.Camera.IsActive = false;
     }
 
     public override void HandleInput(InputHelper inputHelper)

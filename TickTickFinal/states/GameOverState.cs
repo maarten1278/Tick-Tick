@@ -27,8 +27,6 @@ class GameOverState : GameObjectList
     public override void Update(GameTime gameTime)
     {
         playingState.Update(gameTime);
-
-        GameEnvironment.Camera.IsActive = true;
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
