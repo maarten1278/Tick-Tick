@@ -17,6 +17,8 @@ class PlayingState : IGameLoopObject
         levels = new List<Level>();
         LoadLevels();
         LoadLevelsStatus(content.RootDirectory + "/Levels/levels_status.txt");
+
+        GameEnvironment.Camera.IsActive = true;
     }
 
     public Level CurrentLevel

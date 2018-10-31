@@ -127,6 +127,8 @@ partial class Player : AnimatedGameObject
         }
 
         DoPhysics();
+
+        GameEnvironment.Camera.Update();
     }
 
     public void Explode()
