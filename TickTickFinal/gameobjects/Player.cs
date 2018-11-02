@@ -11,6 +11,7 @@ partial class Player : AnimatedGameObject
     protected bool exploded;
     protected bool finished;
     protected bool walkingOnIce, walkingOnHot;
+    private float newBombTimer;
 
     public Player(Vector2 start) : base(2, "player")
     {
@@ -37,6 +38,7 @@ partial class Player : AnimatedGameObject
         walkingOnHot = false;
         PlayAnimation("idle");
         previousYPosition = BoundingBox.Bottom;
+        newBombTimer = 0f;
     }
 
     public override void HandleInput(InputHelper inputHelper)
@@ -66,9 +68,14 @@ partial class Player : AnimatedGameObject
         {
             Mirror = velocity.X < 0;
         }
-        if ((inputHelper.KeyPressed(Keys.Space) || inputHelper.KeyPressed(Keys.Up)) && isOnTheGround)
+        if (inputHelper.KeyPressed(Keys.Up) && isOnTheGround)
         {
             Jump();
+        }
+        if (inputHelper.KeyPressed(Keys.Space) && newBombTimer <= 0)
+        {
+            Shoot();
+            newBombTimer = 1f;
         }
     }
 
@@ -115,6 +122,16 @@ partial class Player : AnimatedGameObject
         }
 
         DoPhysics();
+
+        newBombTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+    }
+
+    private void Shoot()
+    {
+        GameObjectList playerBombs = GameWorld.Find("playerBombs") as GameObjectList;
+        PlayerBomb bomb = new PlayerBomb(this);
+        bomb.Position = position;
+        playerBombs.Add(bomb);
     }
 
     public void Explode()

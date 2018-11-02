@@ -16,6 +16,7 @@ class Rocket : AnimatedGameObject
 
     public override void Reset()
     {
+        beGone = false;
         visible = false;
         position = startPosition;
         velocity = Vector2.Zero;
@@ -25,6 +26,8 @@ class Rocket : AnimatedGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        if (beGone)
+            return;
         if (spawnTime > 0)
         {
             spawnTime -= gameTime.ElapsedGameTime.TotalSeconds;
@@ -51,7 +54,11 @@ class Rocket : AnimatedGameObject
         if (CollidesWith(player) && visible)
         {
             if (player.BoundingBox.Top + player.BoundingBox.Height < BoundingBox.Center.Y)
-                Reset();
+            {
+                //(parent as GameObjectList).Remove(this);
+                beGone = true;
+                visible = false;
+            }
             else
                 player.Die(false);
         }

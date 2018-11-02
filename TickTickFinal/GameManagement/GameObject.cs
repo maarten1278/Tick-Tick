@@ -8,6 +8,7 @@ public abstract class GameObject : IGameLoopObject
     protected int layer;
     protected string id;
     protected bool visible;
+    protected bool beGone;
 
     public GameObject(int layer = 0, string id = "")
     {
@@ -107,6 +108,12 @@ public abstract class GameObject : IGameLoopObject
     {
         get { return visible; }
         set { visible = value; }
+    }
+
+    public bool BeGone
+    {
+        get { return beGone;  }
+        set { beGone = value; }
     }
 
     public virtual Rectangle BoundingBox
