@@ -28,7 +28,7 @@ public class GameEnvironment : Game
         random = new Random();
         assetManager = new AssetManager(Content);
         gameSettingsManager = new GameSettingsManager();
-        camera = new Camera(spriteScale.Scale);
+        camera = new Camera();
     }
 
     public static Point Screen
@@ -141,6 +141,9 @@ public class GameEnvironment : Game
     {
         HandleInput();
         gameStateManager.Update(gameTime);
+
+        //Toevoegingen
+        camera.Scale = inputHelper.Scale;
     }
 
     protected override void Draw(GameTime gameTime)

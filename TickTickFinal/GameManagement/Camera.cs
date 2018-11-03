@@ -6,17 +6,16 @@ public class Camera : GameObject
 {
     Player player;
     Vector2 windowSize;
-    float scale;
+    Vector2 scale;
 
-    public Camera(float scale) : base()
+    public Camera() : base()
     {
         position = new Vector2(windowSize.X / 2, windowSize.Y / 2);
     }
 
     public override void Update(GameTime gameTime)
     {
-        Console.WriteLine(player.Center);
-           position = (player.Position + player.Center * scale) - windowSize / 2;
+        position = windowSize / 2 - player.Position;
     }
 
     public override void Reset()
@@ -32,5 +31,10 @@ public class Camera : GameObject
     public Vector2 WindowSize
     {
         set { windowSize = value; }
+    }
+
+    public Vector2 Scale
+    {
+        set { scale = value; }
     }
 }
