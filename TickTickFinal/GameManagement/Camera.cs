@@ -1,29 +1,36 @@
 ﻿using System;
+
 using Microsoft.Xna.Framework;
 
 public class Camera : GameObject
 {
     Player player;
+    Vector2 windowSize;
+    float scale;
 
-    public Camera() : base()
+    public Camera(float scale) : base()
     {
-        position = new Vector2(GameEnvironment.Screen.X / 2, GameEnvironment.Screen.Y / 2);
-        visible = false;
+        position = new Vector2(windowSize.X / 2, windowSize.Y / 2);
     }
 
     public override void Update(GameTime gameTime)
     {
-        Console.WriteLine(player.Position.X);
-        if (player != null)
-        {
-            position.X =  player.Position.X - GameEnvironment.Screen.X / 2;
-            position.Y = player.Position.Y + GameEnvironment.Screen.Y / 2;
-            Console.WriteLine(player.Position.X);
-        }
+        Console.WriteLine(player.Center);
+           position = (player.Position + player.Center * scale) - windowSize / 2;
+    }
+
+    public override void Reset()
+    {
+        position = Vector2.Zero;
     }
 
     public Player Player
     {
-        set { value = player; }
+        set { player = value; }
+    }
+
+    public Vector2 WindowSize
+    {
+        set { windowSize = value; }
     }
 }

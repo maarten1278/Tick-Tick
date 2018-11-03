@@ -24,4 +24,9 @@ class HelpState : GameObjectList
             GameEnvironment.GameStateManager.SwitchTo("titleMenu");
         }
     }
+
+    public override void Update(GameTime gameTime)
+    {
+        GameEnvironment.Camera.Reset();
+    }
 }
