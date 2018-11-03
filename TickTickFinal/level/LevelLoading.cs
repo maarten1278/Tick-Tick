@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Microsoft.Xna.Framework;
 
@@ -99,6 +100,10 @@ partial class Level : GameObjectList
         Vector2 startPosition = new Vector2(((float)x + 0.5f) * tiles.CellWidth, (y + 1) * tiles.CellHeight);
         Player player = new Player(startPosition);
         Add(player);
+
+        //Toevoegingen
+        GameEnvironment.Camera.Player = player;
+
         return new Tile("", TileType.Background);
     }
 

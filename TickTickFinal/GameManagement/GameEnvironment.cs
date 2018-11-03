@@ -16,6 +16,7 @@ public class GameEnvironment : Game
     protected static Random random;
     protected static AssetManager assetManager;
     protected static GameSettingsManager gameSettingsManager;
+    protected static Camera camera;
 
     public GameEnvironment()
     {
@@ -27,6 +28,7 @@ public class GameEnvironment : Game
         random = new Random();
         assetManager = new AssetManager(Content);
         gameSettingsManager = new GameSettingsManager();
+        camera = new Camera();
     }
 
     public static Point Screen
@@ -53,6 +55,16 @@ public class GameEnvironment : Game
     public static GameSettingsManager GameSettingsManager
     {
         get { return gameSettingsManager; }
+    }
+
+    public static Camera Camera
+    {
+        get { return camera; }
+    }
+
+    public Matrix SpriteScale
+    {
+        get { return spriteScale; }
     }
 
     public bool FullScreen
@@ -97,6 +109,8 @@ public class GameEnvironment : Game
         viewport.Height = height;
         GraphicsDevice.Viewport = viewport;
 
+        Camera.WindowSize = new Vector2(width, height);
+
         inputHelper.Scale = new Vector2((float)GraphicsDevice.Viewport.Width / screen.X,
                                         (float)GraphicsDevice.Viewport.Height / screen.Y);
         inputHelper.Offset = new Vector2(viewport.X, viewport.Y);
@@ -127,6 +141,9 @@ public class GameEnvironment : Game
     {
         HandleInput();
         gameStateManager.Update(gameTime);
+
+        //Toevoegingen
+        camera.Scale = inputHelper.Scale;
     }
 
     protected override void Draw(GameTime gameTime)

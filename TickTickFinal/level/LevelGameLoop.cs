@@ -19,6 +19,7 @@ partial class Level : GameObjectList
 
         TimerGameObject timer = Find("timer") as TimerGameObject;
         Player player = Find("player") as Player;
+        GameEnvironment.Camera.Update(gameTime);
 
         // check if we died
         if (!player.IsAlive)

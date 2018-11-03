@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 public class SpriteGameObject : GameObject
 {
@@ -26,7 +27,8 @@ public class SpriteGameObject : GameObject
         {
             return;
         }
-        sprite.Draw(spriteBatch, this.GlobalPosition, origin);
+        
+        sprite.Draw(spriteBatch, this.GlobalPosition + GameEnvironment.Camera.Position, origin);
     }
 
     public SpriteSheet Sprite
